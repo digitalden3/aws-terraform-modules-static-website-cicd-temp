@@ -10,7 +10,7 @@ resource "aws_s3_bucket_versioning" "website_versioning" {
   bucket = aws_s3_bucket.website_bucket.id
 
   versioning_configuration {
-    status = "Enabled"
+    status = var.versioning_enabled
   }
 }
 
@@ -22,10 +22,13 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "website_bucket_block_public_access" {
+resource "aws_s3_bucket_public_access_block" "website_bucket_allow_public_access" {
   bucket = aws_s3_bucket.website_bucket.id
 
+  block_public_acls   = false
   block_public_policy = false
+  ignore_public_acls  = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_policy" "website_policy" {
@@ -42,5 +45,5 @@ resource "aws_s3_bucket_policy" "website_policy" {
     ]
   })
 
-  depends_on = [aws_s3_bucket_public_access_block.website_bucket_block_public_access]
+  depends_on = [aws_s3_bucket_public_access_block.website_bucket_allow_public_access]
 }

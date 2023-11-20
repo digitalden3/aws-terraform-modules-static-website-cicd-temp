@@ -6,3 +6,5 @@ root_domain = "denizyilmaz.cloud"
 dns_record_ttl = 300
 website_bucket = "denizyilmaz.cloud"
 index_document = "index.html"
+force_destroy = false
+versioning_enabled = "Enabled"
