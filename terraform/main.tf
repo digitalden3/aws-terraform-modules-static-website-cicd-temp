@@ -29,4 +29,6 @@ module "s3_website" {
   website_bucket                                      = var.website_bucket
   index_document                                      = var.index_document
   region                                              = var.region
+  versioning_enabled                                  = var.versioning_enabled
+  force_destroy                                       = var.force_destroy
 }
